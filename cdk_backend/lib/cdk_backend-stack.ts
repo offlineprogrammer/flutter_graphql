@@ -1,17 +1,15 @@
 
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import {
-  AmplifyGraphqlApi,
-  AmplifyGraphqlDefinition
-} from '@aws-amplify/graphql-api-construct';
+import { AmplifyData, AmplifyDataDefinition } from '@aws-amplify/data-construct';
+
 
 export class CdkBackendStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const amplifyApi = new AmplifyGraphqlApi(this, 'AmplifyCdkGraphQlApi', {
-      definition: AmplifyGraphqlDefinition.fromFiles('../graphql/schema.graphql'),
+    new AmplifyData(this, 'AmplifyCdkData', {
+      definition: AmplifyDataDefinition.fromFiles('../graphql/schema.graphql'),
       authorizationModes: {
         defaultAuthorizationMode: 'API_KEY',
         apiKeyConfig: {
